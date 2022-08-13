@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name" translatable="false">SplashScreen</string>
+    <string name="app_hello" translatable="false">¡Hello World!</string>
+</resources>
