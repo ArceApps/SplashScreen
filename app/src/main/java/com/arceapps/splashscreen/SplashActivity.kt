@@ -1,13 +1,12 @@
 package com.arceapps.splashscreen
 
-import android.animation.ObjectAnimator
+import android.animation.AnimatorSet
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.animation.DecelerateInterpolator
-import androidx.annotation.RequiresApi
+import android.view.ViewTreeObserver
+import android.view.animation.AnticipateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen
@@ -21,8 +20,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 class SplashActivity : AppCompatActivity() {
     private lateinit var splashScreen : SplashScreen
     companion object {
-        private const val TIMER_ANIMATION: Long = 1500
-        private const val TIMER_DELAY: Long = 5000
+        private const val TIMER_ANIMATION: Long = 1000
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
         useCustomExitAnimation()
 
         // keep splash screen on-screen for longer period.
-        // keepSplashScreenFor5Seconds()
+        splashScreenWhenViewModel()
     }
 
     /**
@@ -44,19 +42,19 @@ class SplashActivity : AppCompatActivity() {
      */
     private fun useCustomExitAnimation() {
         splashScreen.setOnExitAnimationListener { splashScreenView ->
-            val slideBack = ObjectAnimator.ofFloat(
-                splashScreenView.view,
-                View.TRANSLATION_Y,
-                0f,
-                -splashScreenView.view.height.toFloat(),
-            )
-            slideBack.interpolator = DecelerateInterpolator()
-            slideBack.duration = TIMER_ANIMATION
-            slideBack.doOnEnd {
+            val customAnimation = CustomAnimation()
+            val animation = customAnimation.scaleXYAnimation(splashScreenView)
+
+            val animatorSet = AnimatorSet()
+            animatorSet.duration = TIMER_ANIMATION
+            animatorSet.interpolator = AnticipateInterpolator()
+            animatorSet.playTogether(animation)
+
+            animatorSet.doOnEnd {
                 splashScreenView.remove()
                 toMainActivity()
             }
-            slideBack.start()
+            animatorSet.start()
         }
     }
 
@@ -72,12 +70,20 @@ class SplashActivity : AppCompatActivity() {
      * Keep splash screen on-screen for longer period. This is useful if you need to load data when
      * splash screen is appearing.
      */
-    private fun keepSplashScreenFor5Seconds() {
-        splashScreen.setOnExitAnimationListener { splashScreenView ->
-            Thread.sleep(TIMER_DELAY)
-            splashScreenView.remove()
-            toMainActivity()
-        }
+    private fun splashScreenWhenViewModel() {
+        val content: View = findViewById(android.R.id.content)
+        val model = ViewModelSplash()
+        content.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    if (model.isDataReady()) {
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        useCustomExitAnimation()
+                        return true
+                    } else return false
+                }
+            }
+        )
     }
 
     private fun toMainActivity() {
