@@ -10,21 +10,21 @@ Android 12 adds the SplashScreen API, which enables a new app launch animation f
 
 # 🔖　ScreenShot
 <div align=center>
-    <img src="alpha.webm" width="40%"/>
+    <img src="alpha.mp4" width="40%"/>
 </div>
 
 <br/>
 
 <div align=center>
-    <img src="slideX.webm" width="40%"/>
-    <img src="slideUp.webm" width="40%"/>
+    <img src="slideX.mp4" width="40%"/>
+    <img src="slideUp.mp4" width="40%"/>
 </div>
 
 <br/>
 
 <div align=center>
-    <img src="scaleX.webm" width="40%"/>
-    <img src="scaleXY.webm" width="40%"/>
+    <img src="scaleX.mp4" width="40%"/>
+    <img src="scaleXY.mp4" width="40%"/>
 </div>
 
 <br/>
