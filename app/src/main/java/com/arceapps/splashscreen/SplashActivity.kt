@@ -1,8 +1,10 @@
 package com.arceapps.splashscreen
 
 import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
@@ -20,7 +22,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 class SplashActivity : AppCompatActivity() {
     private lateinit var splashScreen : SplashScreen
     companion object {
-        private const val TIMER_ANIMATION: Long = 1000
+        private const val TIMER_ANIMATION: Long = 1200
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,19 +33,21 @@ class SplashActivity : AppCompatActivity() {
         // keepSplashScreenIndefinitely()
 
         // if you want to use custom exit animation.
-        useCustomExitAnimation()
+        customSplashAnimator()
+        // customIconSplashAnimator()
 
-        // keep splash screen on-screen for longer period.
+        // keep splash screen when load data viewModel.
         splashScreenWhenViewModel()
     }
 
     /**
      * Use customize exit animation for splash screen.
      */
-    private fun useCustomExitAnimation() {
+    @SuppressLint("ResourceAsColor")
+    private fun customSplashAnimator() {
         splashScreen.setOnExitAnimationListener { splashScreenView ->
-            val customAnimation = CustomAnimation()
-            val animation = customAnimation.scaleXYAnimation(splashScreenView)
+            val customAnimation = CustomScreenAnimator()
+            val animation = customAnimation.alphaAnimation(splashScreenView)
 
             val animatorSet = AnimatorSet()
             animatorSet.duration = TIMER_ANIMATION
@@ -78,7 +82,6 @@ class SplashActivity : AppCompatActivity() {
                 override fun onPreDraw(): Boolean {
                     if (model.isDataReady()) {
                         content.viewTreeObserver.removeOnPreDrawListener(this)
-                        useCustomExitAnimation()
                         return true
                     } else return false
                 }

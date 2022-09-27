@@ -10,7 +10,7 @@ import androidx.core.splashscreen.SplashScreenViewProvider
  * Created by ArceApps on 25/09/2022.
  * Project name: SplashScreen.
  */
-class CustomAnimation {
+class CustomScreenAnimator {
 
     @SuppressLint("Recycle")
     public fun slideUpAnimation(splashScreenView: SplashScreenViewProvider): ObjectAnimator {

@@ -17,7 +17,7 @@
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/splash_screen</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/kotlin</item>
-        <item name="windowSplashScreenAnimationDuration">1500</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
         <item name="postSplashScreenTheme">@style/Theme.Main</item>
     </style>
 </resources>

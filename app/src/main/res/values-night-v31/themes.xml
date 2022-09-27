@@ -2,9 +2,10 @@
 <resources>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="android:background">@color/splash_screen</item>
         <item name="windowSplashScreenBackground">@color/splash_screen</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/kotlin_animated</item>
-        <item name="windowSplashScreenAnimationDuration">1500</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
         <item name="postSplashScreenTheme">@style/Theme.Main</item>
         <item name="android:windowSplashScreenBrandingImage">@drawable/branding_splashscreen</item>
     </style>
