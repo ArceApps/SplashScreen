@@ -10,21 +10,17 @@ Android 12 adds the SplashScreen API, which enables a new app launch animation f
 
 # 🔖　ScreenShot
 <div align=center>
-    <img src="images/kotlin_alpha.gif" width="40%"/>
+    <img src="images/kotlin_static.gif" width="30%"/>
+    <img src="images/kotlin_alpha.gif" width="30%"/>
+    <img src="images/kotlin_slide_left.gif" width="30%"/>
 </div>
 
 <br/>
 
 <div align=center>
-    <img src="images/kotlin_slideX.gif" width="40%"/>
-    <img src="images/kotlin_slideUp.gif" width="40%"/>
-</div>
-
-<br/>
-
-<div align=center>
-    <img src="images/kotlin_scaleX.gif" width="40%"/>
-    <img src="images/kotlin_scaleXY.gif" width="40%"/>
+    <img src="images/kotlin_slide_up.gif" width="30%"/>
+    <img src="images/kotlin_scale_x.gif" width="30%"/>
+    <img src="images/kotlin_scale_xy.gif" width="30%"/>
 </div>
 
 <br/>
